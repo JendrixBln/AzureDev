@@ -1,220 +1,101 @@
 {
-  "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041",
-  "name": "CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041",
-  "type": "Microsoft.Resources/deployments",
-  "tags": {
-    "primaryResourceId": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourcegroups/K10_Josef/providers/Microsoft.Compute/virtualMachines/DevJosefG",
-    "marketplaceItemId": "microsoftwindowsdesktop.windows-11win11-23h2-pro",
-    "provisioningHash": "SolutionProvider"
-  },
-  "properties": {
-    "templateHash": "4180048338348246745",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
     "parameters": {
-      "location": {
-        "type": "String",
-        "value": "northeurope"
-      },
-      "networkInterfaceName": {
-        "type": "String",
-        "value": "devjosefg986"
-      },
-      "networkSecurityGroupName": {
-        "type": "String",
-        "value": "DevJosefG-nsg"
-      },
-      "networkSecurityGroupRules": {
-        "type": "Array",
-        "value": [
-          {
-            "name": "RDP",
-            "properties": {
-              "priority": 300,
-              "protocol": "TCP",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourceAddressPrefix": "*",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*",
-              "destinationPortRange": "3389"
-            }
-          }
-        ]
-      },
-      "subnetName": {
-        "type": "String",
-        "value": "default"
-      },
-      "virtualNetworkName": {
-        "type": "String",
-        "value": "DevJosefG-vnet"
-      },
-      "addressPrefixes": {
-        "type": "Array",
-        "value": [
-          "10.0.0.0/16"
-        ]
-      },
-      "subnets": {
-        "type": "Array",
-        "value": [
-          {
-            "name": "default",
-            "properties": {
-              "addressPrefix": "10.0.0.0/24"
-            }
-          }
-        ]
-      },
-      "publicIpAddressName": {
-        "type": "String",
-        "value": "DevJosefG-ip"
-      },
-      "publicIpAddressType": {
-        "type": "String",
-        "value": "Static"
-      },
-      "publicIpAddressSku": {
-        "type": "String",
-        "value": "Standard"
-      },
-      "pipDeleteOption": {
-        "type": "String",
-        "value": "Delete"
-      },
-      "virtualMachineName": {
-        "type": "String",
-        "value": "DevJosefG"
-      },
-      "virtualMachineComputerName": {
-        "type": "String",
-        "value": "DevJosefG"
-      },
-      "virtualMachineRG": {
-        "type": "String",
-        "value": "K10_Josef"
-      },
-      "osDiskType": {
-        "type": "String",
-        "value": "Standard_LRS"
-      },
-      "osDiskDeleteOption": {
-        "type": "String",
-        "value": "Delete"
-      },
-      "virtualMachineSize": {
-        "type": "String",
-        "value": "Standard_B2s"
-      },
-      "nicDeleteOption": {
-        "type": "String",
-        "value": "Delete"
-      },
-      "hibernationEnabled": {
-        "type": "Bool",
-        "value": false
-      },
-      "adminUsername": {
-        "type": "String",
-        "value": "adminuser"
-      },
-      "adminPassword": {
-        "type": "SecureString"
-      },
-      "patchMode": {
-        "type": "String",
-        "value": "AutomaticByOS"
-      },
-      "enableHotpatching": {
-        "type": "Bool",
-        "value": false
-      }
-    },
-    "mode": "Incremental",
-    "debugSetting": {
-      "detailLevel": "None"
-    },
-    "provisioningState": "Running",
-    "timestamp": "2024-06-12T12:25:31.5386562Z",
-    "duration": "PT2M12.0361691S",
-    "correlationId": "647b2c43-97b9-4774-a371-402e62f82aba",
-    "providers": [
-      {
-        "namespace": "Microsoft.Network",
-        "resourceTypes": [
-          {
-            "resourceType": "networkInterfaces",
-            "locations": [
-              "northeurope"
+        "location": {
+            "value": "northeurope"
+        },
+        "networkInterfaceName": {
+            "value": "devjosefg292"
+        },
+        "networkSecurityGroupName": {
+            "value": "DevJosefG-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
             ]
-          },
-          {
-            "resourceType": "networkSecurityGroups",
-            "locations": [
-              "northeurope"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "DevJosefG-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
             ]
-          },
-          {
-            "resourceType": "virtualNetworks",
-            "locations": [
-              "northeurope"
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
             ]
-          },
-          {
-            "resourceType": "publicIpAddresses",
-            "locations": [
-              "northeurope"
-            ]
-          }
-        ]
-      },
-      {
-        "namespace": "Microsoft.Compute",
-        "resourceTypes": [
-          {
-            "resourceType": "virtualMachines",
-            "locations": [
-              "northeurope"
-            ]
-          }
-        ]
-      }
-    ],
-    "dependencies": [
-      {
-        "dependsOn": [
-          {
-            "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/networkSecurityGroups/DevJosefG-nsg",
-            "resourceType": "Microsoft.Network/networkSecurityGroups",
-            "resourceName": "DevJosefG-nsg"
-          },
-          {
-            "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/virtualNetworks/DevJosefG-vnet",
-            "resourceType": "Microsoft.Network/virtualNetworks",
-            "resourceName": "DevJosefG-vnet"
-          },
-          {
-            "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/publicIpAddresses/DevJosefG-ip",
-            "resourceType": "Microsoft.Network/publicIpAddresses",
-            "resourceName": "DevJosefG-ip"
-          }
-        ],
-        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/networkInterfaces/devjosefg986",
-        "resourceType": "Microsoft.Network/networkInterfaces",
-        "resourceName": "devjosefg986"
-      },
-      {
-        "dependsOn": [
-          {
-            "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/networkInterfaces/devjosefg986",
-            "resourceType": "Microsoft.Network/networkInterfaces",
-            "resourceName": "devjosefg986"
-          }
-        ],
-        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Compute/virtualMachines/DevJosefG",
-        "resourceType": "Microsoft.Compute/virtualMachines",
-        "resourceName": "DevJosefG"
-      }
-    ],
-    "validationLevel": "Template"
-  }
+        },
+        "publicIpAddressName": {
+            "value": "DevJosefG-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineName": {
+            "value": "DevJosefG"
+        },
+        "virtualMachineComputerName": {
+            "value": "DevJosefG"
+        },
+        "virtualMachineRG": {
+            "value": "K10_Josef"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2s"
+        },
+        "nicDeleteOption": {
+            "value": "Delete"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "adminuser"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        }
+    }
 }
