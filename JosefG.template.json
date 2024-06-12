@@ -1,0 +1,87 @@
+[
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041/operations/E74663404216817F",
+    "operationId": "E74663404216817F",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Running",
+      "timestamp": "2024-06-12T12:25:31.6163798Z",
+      "duration": "PT2M4.4067161S",
+      "trackingId": "2a5c271c-9134-48f5-82a0-323809fb8edc",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Compute/virtualMachines/DevJosefG",
+        "resourceType": "Microsoft.Compute/virtualMachines",
+        "resourceName": "DevJosefG"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041/operations/53A6937C49923996",
+    "operationId": "53A6937C49923996",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T12:23:28.140576Z",
+      "duration": "PT0.9309123S",
+      "trackingId": "f4532f59-b4f9-470b-b7fd-477ad070fe54",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/networkInterfaces/devjosefg986",
+        "resourceType": "Microsoft.Network/networkInterfaces",
+        "resourceName": "devjosefg986"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041/operations/8B1809339345D052",
+    "operationId": "8B1809339345D052",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T12:23:27.0511697Z",
+      "duration": "PT6.1224815S",
+      "trackingId": "5cac7216-9bb6-46a3-a979-2710c1236902",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/virtualNetworks/DevJosefG-vnet",
+        "resourceType": "Microsoft.Network/virtualNetworks",
+        "resourceName": "DevJosefG-vnet"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041/operations/678D2F720FFC1876",
+    "operationId": "678D2F720FFC1876",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T12:23:25.9059843Z",
+      "duration": "PT4.9772961S",
+      "trackingId": "bbc30f74-715b-4e96-abea-8bf6b6186aa3",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/publicIpAddresses/DevJosefG-ip",
+        "resourceType": "Microsoft.Network/publicIpAddresses",
+        "resourceName": "DevJosefG-ip"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612132041/operations/42B8D3E5BDF82D7E",
+    "operationId": "42B8D3E5BDF82D7E",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T12:23:26.0841871Z",
+      "duration": "PT5.1554989S",
+      "trackingId": "6f621ea0-573c-47ae-8ace-d901701ebd90",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Josef/providers/Microsoft.Network/networkSecurityGroups/DevJosefG-nsg",
+        "resourceType": "Microsoft.Network/networkSecurityGroups",
+        "resourceName": "DevJosefG-nsg"
+      }
+    }
+  }
+]
