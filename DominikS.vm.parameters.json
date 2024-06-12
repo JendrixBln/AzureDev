@@ -1,0 +1,113 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westus2"
+        },
+        "networkInterfaceName": {
+            "value": "devdominikschnor197"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "networkSecurityGroupName": {
+            "value": "DevDominikSchnor-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "DevDominikSchnor-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
+            ]
+        },
+        "publicIpAddressName": {
+            "value": "DevDominikSchnor-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineName": {
+            "value": "DevDominikSchnor"
+        },
+        "virtualMachineComputerName": {
+            "value": "DevDominikSchno"
+        },
+        "virtualMachineRG": {
+            "value": "K10_Dominik"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2als_v2"
+        },
+        "nicDeleteOption": {
+            "value": "Delete"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "adminuser"
+        },
+        "adminPassword": {
+            "value": "123456789qQ!"
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "securityType": {
+            "value": "TrustedLaunch"
+        },
+        "secureBoot": {
+            "value": true
+        },
+        "vTPM": {
+            "value": true
+        }
+    }
+}
