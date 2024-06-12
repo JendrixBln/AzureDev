@@ -89,7 +89,7 @@
             "value": "adminuser"
         },
         "adminPassword": {
-            "value": null
+            "value": "Passwort123!"
         },
         "patchMode": {
             "value": "AutomaticByOS"
