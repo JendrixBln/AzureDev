@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_K10ServerAleM_name": {
+            "value": "K10ServerAleM"
+        },
+        "virtualMachines_K10Client1AleM_name": {
+            "value": "K10Client1AleM"
+        },
+        "virtualMachines_K10Client2AleM_name": {
+            "value": "K10Client2AleM"
+        },
+        "virtualNetworks_K10AleMexicoNet_name": {
+            "value": "K10AleMexicoNet"
+        },
+        "networkInterfaces_k10client2alem74_name": {
+            "value": "k10client2alem74"
+        },
+        "networkInterfaces_k10serveralem718_name": {
+            "value": "k10serveralem718"
+        },
+        "networkInterfaces_k10client1alem963_name": {
+            "value": "k10client1alem963"
+        },
+        "bastionHosts_K10AleMexicoNet_Bastion_name": {
+            "value": "K10AleMexicoNet-Bastion"
+        },
+        "networkSecurityGroups_K10ServerAleM_nsg_name": {
+            "value": "K10ServerAleM-nsg"
+        },
+        "networkSecurityGroups_K10Client1AleM_nsg_name": {
+            "value": "K10Client1AleM-nsg"
+        },
+        "networkSecurityGroups_K10Client2AleM_nsg_name": {
+            "value": "K10Client2AleM-nsg"
+        },
+        "publicIPAddresses_k10alemexiconet_bastion_name": {
+            "value": "k10alemexiconet-bastion"
+        }
+    }
+}
