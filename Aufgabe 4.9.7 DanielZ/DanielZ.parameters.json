@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_VNet_K10_Daniel_name": {
+            "value": null
+        },
+        "virtualMachines_Server2022K10Daniel_name": {
+            "value": null
+        },
+        "virtualMachines_Win11Clint1K10Daniel_name": {
+            "value": null
+        },
+        "bastionHosts_VNet_K10_Daniel_Bastion_name": {
+            "value": null
+        },
+        "virtualMachines_Win11Client2K10Daniel_name": {
+            "value": null
+        },
+        "networkInterfaces_server2022k10daniel97_name": {
+            "value": null
+        },
+        "networkInterfaces_win11clint1k10daniel713_name": {
+            "value": null
+        },
+        "publicIPAddresses_vnet_k10_daniel_bastion_name": {
+            "value": null
+        },
+        "networkInterfaces_win11client2k10daniel623_name": {
+            "value": null
+        },
+        "networkSecurityGroups_Server2022K10Daniel_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_Win11Clint1K10Daniel_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_Win11Client2K10Daniel_nsg_name": {
+            "value": null
+        }
+    }
+}
