@@ -1,0 +1,99 @@
+[
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/89C16A630A3D8164",
+    "operationId": "89C16A630A3D8164",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:45:28.9151807Z",
+      "duration": "PT4M57.9080105S",
+      "trackingId": "10d9ebaa-b0da-44d6-a4ef-6497f28ba061",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Compute/virtualMachines/Sule-Arm-template",
+        "resourceType": "Microsoft.Compute/virtualMachines",
+        "resourceName": "Sule-Arm-template"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/352C36F48763728B",
+    "operationId": "352C36F48763728B",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:40:32.0936427Z",
+      "duration": "PT1.0864725S",
+      "trackingId": "2093a4be-dfe9-4b37-a750-de26fb152bc0",
+      "statusCode": "Created",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Network/networkInterfaces/sule-arm-template883",
+        "resourceType": "Microsoft.Network/networkInterfaces",
+        "resourceName": "sule-arm-template883"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/0E4B544D63B1BD19",
+    "operationId": "0E4B544D63B1BD19",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:40:28.4662618Z",
+      "duration": "PT6.0826646S",
+      "trackingId": "05ac8531-b256-41b4-a40b-5fbbf0ead737",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Network/networkSecurityGroups/Sule-Arm-template-nsg",
+        "resourceType": "Microsoft.Network/networkSecurityGroups",
+        "resourceName": "Sule-Arm-template-nsg"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/1057D5B7426125FC",
+    "operationId": "1057D5B7426125FC",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:40:30.8418892Z",
+      "duration": "PT8.458292S",
+      "trackingId": "0c381ec0-cae9-478e-a060-fc6a6d545e83",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Network/virtualNetworks/Sule-Arm-template-vnet",
+        "resourceType": "Microsoft.Network/virtualNetworks",
+        "resourceName": "Sule-Arm-template-vnet"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/B5072ADE7A603770",
+    "operationId": "B5072ADE7A603770",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:40:28.638455Z",
+      "duration": "PT6.2548578S",
+      "trackingId": "9617f9f9-a0db-4e0a-aefa-561ab9841380",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Network/publicIpAddresses/Sule-Arm-template-ip",
+        "resourceType": "Microsoft.Network/publicIpAddresses",
+        "resourceName": "Sule-Arm-template-ip"
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Suleiman/providers/Microsoft.Resources/deployments/CreateVm-microsoftwindowsdesktop.windows-11-win11-20240612163910/operations/08584834036646183199",
+    "operationId": "08584834036646183199",
+    "properties": {
+      "provisioningOperation": "EvaluateDeploymentOutput",
+      "provisioningState": "Succeeded",
+      "timestamp": "2024-06-12T14:45:29.0591945Z",
+      "duration": "PT4M58.0520243S",
+      "trackingId": "2956b9d9-cc21-4db8-ab08-e781228109e4",
+      "statusCode": "OK"
+    }
+  }
+]
