@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "bastionHosts_AzureBastion_name": {
+            "value": "AzureBastion"
+        },
+        "virtualNetworks_Vnet_north_europe_name": {
+            "value": "Vnet-north-europe"
+        },
+        "virtualMachines_Client1_nort_europe_name": {
+            "value": "Client1-nort-europe"
+        },
+        "virtualMachines_Client2_north_europe_name": {
+            "value": "Client2-north-europe"
+        },
+        "publicIPAddresses_Vnet_north_europe_ip_name": {
+            "value": "Vnet-north-europe-ip"
+        },
+        "publicIPAddresses_Vnetnortheuropeip457_name": {
+            "value": "Vnetnortheuropeip457"
+        },
+        "virtualMachines_WIN11Server_north_europe_name": {
+            "value": "WIN11Server-north-europe"
+        },
+        "networkInterfaces_client1_nort_europe322_name": {
+            "value": "client1-nort-europe322"
+        },
+        "networkInterfaces_client2_north_europe201_name": {
+            "value": "client2-north-europe201"
+        },
+        "networkInterfaces_win11server_north_europe796_name": {
+            "value": "win11server-north-europe796"
+        },
+        "networkSecurityGroups_Client1_nort_europe_nsg_name": {
+            "value": "Client1-nort-europe-nsg"
+        },
+        "networkSecurityGroups_Client2_north_europe_nsg_name": {
+            "value": "Client2-north-europe-nsg"
+        },
+        "networkSecurityGroups_WIN11Server_north_europe_nsg_name": {
+            "value": "WIN11Server-north-europe-nsg"
+        }
+    }
+}
