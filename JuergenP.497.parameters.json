@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_K10_Juergen_VNet_name": {
+            "value": "K10Juergenvnet"
+        },
+        "virtualMachines_K10_Juergen_Server_name": {
+            "value": "K10Juergenserver"
+        },
+        "virtualMachines_K10_Juergen_Client1_name": {
+            "value": "K10Juergenclient1"
+        },
+        "virtualMachines_K10_Juergen_Client2_name": {
+            "value": "K10Juergenclient2"
+        },
+        "bastionHosts_K10_Juergen_VNet_Bastion_name": {
+            "value": "K10Juergenbastion"
+        },
+        "networkInterfaces_k10_juergen_client151_name": {
+            "value": "K10Juergenclient1ni1"
+        },
+        "networkInterfaces_k10_juergen_client2761_name": {
+            "value": "K10Juergenclient1ni2"
+        },
+        "networkInterfaces_k10_juergen_server409_z1_name": {
+            "value": "K10Juergenserverni"
+        },
+        "publicIPAddresses_k10_juergen_vnet_bastion_name": {
+            "value": "K10Juergenbastionpubip"
+        },
+        "networkSecurityGroups_K10_Juergen_Server_nsg_name": {
+            "value": "K10Juergenservernsg"
+        },
+        "networkSecurityGroups_K10_Juergen_Client1_nsg_name": {
+            "value": "K10Juergenclient1nsg"
+        },
+        "networkSecurityGroups_K10_Juergen_Client2_nsg_name": {
+            "value": "K10Juergenclient2nsg"
+        }
+    }
+}
