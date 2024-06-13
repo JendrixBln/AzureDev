@@ -1,0 +1,788 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_K10_Juergen_VNet_name": {
+            "defaultValue": "K10_Juergen_VNet",
+            "type": "String"
+        },
+        "virtualMachines_K10_Juergen_Server_name": {
+            "defaultValue": "K10-Juergen-Server",
+            "type": "String"
+        },
+        "virtualMachines_K10_Juergen_Client1_name": {
+            "defaultValue": "K10-Juergen-Client1",
+            "type": "String"
+        },
+        "virtualMachines_K10_Juergen_Client2_name": {
+            "defaultValue": "K10-Juergen-Client2",
+            "type": "String"
+        },
+        "bastionHosts_K10_Juergen_VNet_Bastion_name": {
+            "defaultValue": "K10_Juergen_VNet-Bastion",
+            "type": "String"
+        },
+        "networkInterfaces_k10_juergen_client151_name": {
+            "defaultValue": "k10-juergen-client151",
+            "type": "String"
+        },
+        "networkInterfaces_k10_juergen_client2761_name": {
+            "defaultValue": "k10-juergen-client2761",
+            "type": "String"
+        },
+        "networkInterfaces_k10_juergen_server409_z1_name": {
+            "defaultValue": "k10-juergen-server409_z1",
+            "type": "String"
+        },
+        "publicIPAddresses_k10_juergen_vnet_bastion_name": {
+            "defaultValue": "k10_juergen_vnet-bastion",
+            "type": "String"
+        },
+        "networkSecurityGroups_K10_Juergen_Server_nsg_name": {
+            "defaultValue": "K10-Juergen-Server-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_K10_Juergen_Client1_nsg_name": {
+            "defaultValue": "K10-Juergen-Client1-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_K10_Juergen_Client2_nsg_name": {
+            "defaultValue": "K10-Juergen-Client2-nsg",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name')]",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name'), 'RDP')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name')]",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name'), 'RDP')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name')]",
+            "location": "eastus",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), 'RDP')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "10.0.2.0/24",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAnyCustomAnyInbound",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), 'DenyAnyCustomAnyInbound')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 320,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAnyCustomAnyOutbound",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), 'DenyAnyCustomAnyOutbound')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 330,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('publicIPAddresses_k10_juergen_vnet_bastion_name')]",
+            "location": "eastus",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "ipAddress": "172.173.187.109",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": [],
+                "ddosSettings": {
+                    "protectionMode": "VirtualNetworkInherited"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('virtualNetworks_K10_Juergen_VNet_name')]",
+            "location": "eastus",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "encryption": {
+                    "enabled": false,
+                    "enforcement": "AllowUnencrypted"
+                },
+                "subnets": [
+                    {
+                        "name": "ServerSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ServerSubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.1.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "name": "ClientSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ClientSubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.2.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "name": "AzureBastionSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'AzureBastionSubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.0.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_K10_Juergen_Client1_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client151_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "microsoftwindowsdesktop",
+                        "offer": "windows-11",
+                        "sku": "win11-23h2-pro",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_K10_Juergen_Client1_name'), '_OsDisk_1_693cebdc9e544933b3ece006457572e4')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "K10-Juergen-Cli",
+                    "adminUsername": "adminuser",
+                    "adminPassword": "123456789_ABC",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client151_name'))]",
+                            "properties": {
+                                "deleteOption": "Delete"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_K10_Juergen_Client2_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client2761_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "microsoftwindowsdesktop",
+                        "offer": "windows-11",
+                        "sku": "win11-23h2-pro",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_K10_Juergen_Client2_name'), '_OsDisk_1_f6dfce600a394f62bb07d15ff20a9106')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "K10-Juergen-Cli",
+                    "adminUsername": "adminuser",
+                    "adminPassword": "123456789_ABC",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client2761_name'))]",
+                            "properties": {
+                                "deleteOption": "Delete"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_K10_Juergen_Server_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_server409_z1_name'))]"
+            ],
+            "zones": [
+                "1"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-azure-edition",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_K10_Juergen_Server_name'), '_OsDisk_1_e54b264c8bcf480bbb92e135a4f57d24')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "K10-Juergen-Ser",
+                    "adminUsername": "adminuser",
+                    "adminPassword": "123456789_ABC",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_server409_z1_name'))]",
+                            "properties": {
+                                "deleteOption": "Detach"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), '/DenyAnyCustomAnyInbound')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Deny",
+                "priority": 320,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), '/DenyAnyCustomAnyOutbound')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "*",
+                "sourcePortRange": "*",
+                "destinationPortRange": "*",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Deny",
+                "priority": 330,
+                "direction": "Outbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name'), '/RDP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name'), '/RDP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'), '/RDP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "10.0.2.0/24",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_K10_Juergen_VNet_name'), '/AzureBastionSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_K10_Juergen_VNet_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.0.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_K10_Juergen_VNet_name'), '/ClientSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_K10_Juergen_VNet_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.2.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_K10_Juergen_VNet_name'), '/ServerSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_K10_Juergen_VNet_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.1.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/bastionHosts",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('bastionHosts_K10_Juergen_VNet_Bastion_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_k10_juergen_vnet_bastion_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'AzureBastionSubnet')]"
+            ],
+            "sku": {
+                "name": "Basic"
+            },
+            "properties": {
+                "dnsName": "bst-a1097045-02b9-428b-a9f3-890d0aeaf70a.bastion.azure.com",
+                "scaleUnits": 2,
+                "ipConfigurations": [
+                    {
+                        "name": "IpConf",
+                        "id": "[concat(resourceId('Microsoft.Network/bastionHosts', parameters('bastionHosts_K10_Juergen_VNet_Bastion_name')), '/bastionHostIpConfigurations/IpConf')]",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_k10_juergen_vnet_bastion_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'AzureBastionSubnet')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_k10_juergen_client151_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ClientSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client151_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.2.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ClientSubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client1_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_k10_juergen_client2761_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ClientSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_client2761_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.2.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ClientSubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Client2_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_k10_juergen_server409_z1_name')]",
+            "location": "eastus",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ServerSubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_k10_juergen_server409_z1_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_K10_Juergen_VNet_name'), 'ServerSubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_K10_Juergen_Server_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        }
+    ]
+}

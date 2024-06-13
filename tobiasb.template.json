@@ -8,6 +8,9 @@
         "networkInterfaceName": {
             "type": "string"
         },
+        "enableAcceleratedNetworking": {
+            "type": "bool"
+        },
         "networkSecurityGroupName": {
             "type": "string"
         },
@@ -110,6 +113,7 @@
                         }
                     }
                 ],
+                "enableAcceleratedNetworking": "[parameters('enableAcceleratedNetworking')]",
                 "networkSecurityGroup": {
                     "id": "[variables('nsgId')]"
                 }

@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "value": "northeurope"
+            "value": "mexicocentral"
         },
         "networkInterfaceName": {
-            "value": "devjosefg292"
+            "value": "devalejandro144"
         },
         "networkSecurityGroupName": {
-            "value": "DevJosefG-nsg"
+            "value": "DevAlejandro-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -32,7 +32,7 @@
             "value": "default"
         },
         "virtualNetworkName": {
-            "value": "DevJosefG-vnet"
+            "value": "DevAlejandro-vnet"
         },
         "addressPrefixes": {
             "value": [
@@ -50,7 +50,7 @@
             ]
         },
         "publicIpAddressName": {
-            "value": "DevJosefG-ip"
+            "value": "DevAlejandro-ip"
         },
         "publicIpAddressType": {
             "value": "Static"
@@ -62,16 +62,16 @@
             "value": "Delete"
         },
         "virtualMachineName": {
-            "value": "DevJosefG"
+            "value": "DevAlejandro"
         },
         "virtualMachineComputerName": {
-            "value": "DevJosefG"
+            "value": "DevAlejandro"
         },
         "virtualMachineRG": {
-            "value": "K10_Josef"
+            "value": "K10_Alejandro"
         },
         "osDiskType": {
-            "value": "Standard_LRS"
+            "value": "StandardSSD_LRS"
         },
         "osDiskDeleteOption": {
             "value": "Delete"
@@ -86,10 +86,10 @@
             "value": false
         },
         "adminUsername": {
-            "value": "adminuser"
+            "value": "Adminuser"
         },
         "adminPassword": {
-            "value": "Passwort123!"
+            "value": "Badwolf1234!"
         },
         "patchMode": {
             "value": "AutomaticByOS"

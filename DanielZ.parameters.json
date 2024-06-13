@@ -6,10 +6,10 @@
             "value": "northeurope"
         },
         "networkInterfaceName": {
-            "value": "devjosefg292"
+            "value": "win11testpck10daniel221"
         },
         "networkSecurityGroupName": {
-            "value": "DevJosefG-nsg"
+            "value": "Win11TestPCK10Daniel-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -32,7 +32,7 @@
             "value": "default"
         },
         "virtualNetworkName": {
-            "value": "DevJosefG-vnet"
+            "value": "Win11TestPCK10Daniel-vnet"
         },
         "addressPrefixes": {
             "value": [
@@ -50,7 +50,7 @@
             ]
         },
         "publicIpAddressName": {
-            "value": "DevJosefG-ip"
+            "value": "Win11TestPCK10Daniel-ip"
         },
         "publicIpAddressType": {
             "value": "Static"
@@ -62,13 +62,13 @@
             "value": "Delete"
         },
         "virtualMachineName": {
-            "value": "DevJosefG"
+            "value": "Win11TestPCK10Daniel"
         },
         "virtualMachineComputerName": {
-            "value": "DevJosefG"
+            "value": "Win11TestPCK10D"
         },
         "virtualMachineRG": {
-            "value": "K10_Josef"
+            "value": "K10_Daniel"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -89,7 +89,7 @@
             "value": "adminuser"
         },
         "adminPassword": {
-            "value": "Passwort123!"
+            "value": "175691AaBbCc"
         },
         "patchMode": {
             "value": "AutomaticByOS"

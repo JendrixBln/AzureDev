@@ -1,0 +1,744 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_srv497_name": {
+            "defaultValue": "srv497",
+            "type": "String"
+        },
+        "virtualNetworks_VNet497_name": {
+            "defaultValue": "VNet497",
+            "type": "String"
+        },
+        "virtualMachines_497client1_name": {
+            "defaultValue": "497client1",
+            "type": "String"
+        },
+        "virtualMachines_497client2_name": {
+            "defaultValue": "497client2",
+            "type": "String"
+        },
+        "networkInterfaces_srv497173_name": {
+            "defaultValue": "srv497173",
+            "type": "String"
+        },
+        "bastionHosts_VNet497_Bastion_name": {
+            "defaultValue": "VNet497-Bastion",
+            "type": "String"
+        },
+        "networkInterfaces_497client1186_name": {
+            "defaultValue": "497client1186",
+            "type": "String"
+        },
+        "networkInterfaces_497client2369_name": {
+            "defaultValue": "497client2369",
+            "type": "String"
+        },
+        "networkSecurityGroups_srv497_nsg_name": {
+            "defaultValue": "srv497-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_497client1_nsg_name": {
+            "defaultValue": "497client1-nsg",
+            "type": "String"
+        },
+        "networkSecurityGroups_497client2_nsg_name": {
+            "defaultValue": "497client2-nsg",
+            "type": "String"
+        },
+        "publicIPAddresses_vnet497publicIPbastion_name": {
+            "defaultValue": "vnet497publicIPbastion",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_497client1_nsg_name')]",
+            "location": "japaneast",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_497client1_nsg_name'), 'RDP')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_497client2_nsg_name')]",
+            "location": "japaneast",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_497client2_nsg_name'), 'RDP')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkSecurityGroups_srv497_nsg_name')]",
+            "location": "japaneast",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "AllowCidr3389Inbound",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_srv497_nsg_name'), 'AllowCidr3389Inbound')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "10.0.2.0/24",
+                            "destinationAddressPrefix": "10.0.1.0/24",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    },
+                    {
+                        "name": "DenyAnyCustom3389Inbound",
+                        "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_srv497_nsg_name'), 'DenyAnyCustom3389Inbound')]",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Deny",
+                            "priority": 300,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('publicIPAddresses_vnet497publicIPbastion_name')]",
+            "location": "japaneast",
+            "sku": {
+                "name": "Standard",
+                "tier": "Regional"
+            },
+            "properties": {
+                "ipAddress": "13.71.138.213",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4,
+                "ipTags": [],
+                "ddosSettings": {
+                    "protectionMode": "VirtualNetworkInherited"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('virtualNetworks_VNet497_name')]",
+            "location": "japaneast",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "encryption": {
+                    "enabled": false,
+                    "enforcement": "AllowUnencrypted"
+                },
+                "subnets": [
+                    {
+                        "name": "srvsubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'srvsubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.1.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "name": "clientsubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'clientsubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.2.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "name": "AzureBastionSubnet",
+                        "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'AzureBastionSubnet')]",
+                        "properties": {
+                            "addressPrefixes": [
+                                "10.0.0.0/24"
+                            ],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled"
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ],
+                "virtualNetworkPeerings": [],
+                "enableDdosProtection": false
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_497client1_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client1186_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "microsoftwindowsdesktop",
+                        "offer": "windows-11",
+                        "sku": "win11-23h2-pro",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_497client1_name'), '_OsDisk_1')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_497client1_name')]",
+                    "adminUsername": "Adminuser",
+                    "adminPassword": "Passwort123!!",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client1186_name'))]",
+                            "properties": {
+                                "deleteOption": "Delete"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_497client2_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client2369_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "microsoftwindowsdesktop",
+                        "offer": "windows-11",
+                        "sku": "win11-23h2-pro",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_497client2_name'), '_OsDisk_1')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_497client2_name')]",
+                    "adminUsername": "Adminuser",
+                    "adminPassword": "Passwort123!!",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client2369_name'))]",
+                            "properties": {
+                                "deleteOption": "Delete"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachines_srv497_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv497173_name'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-azure-edition",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_srv497_name'), '_OsDisk_1')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_srv497_name')]",
+                    "adminUsername": "Adminuser",
+                    "adminPassword": "Passwort123!!",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv497173_name'))]",
+                            "properties": {
+                                "deleteOption": "Delete"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                },
+                "licenseType": "Windows_Server"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_srv497_nsg_name'), '/AllowCidr3389Inbound')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_srv497_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "10.0.2.0/24",
+                "destinationAddressPrefix": "10.0.1.0/24",
+                "access": "Allow",
+                "priority": 100,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_srv497_nsg_name'), '/DenyAnyCustom3389Inbound')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_srv497_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Deny",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_497client1_nsg_name'), '/RDP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client1_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('networkSecurityGroups_497client2_nsg_name'), '/RDP')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client2_nsg_name'))]"
+            ],
+            "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": []
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_VNet497_name'), '/AzureBastionSubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_VNet497_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.0.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_VNet497_name'), '/clientsubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_VNet497_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.2.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2023-11-01",
+            "name": "[concat(parameters('virtualNetworks_VNet497_name'), '/srvsubnet')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_VNet497_name'))]"
+            ],
+            "properties": {
+                "addressPrefixes": [
+                    "10.0.1.0/24"
+                ],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Network/bastionHosts",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('bastionHosts_VNet497_Bastion_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_vnet497publicIPbastion_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'AzureBastionSubnet')]"
+            ],
+            "sku": {
+                "name": "Basic"
+            },
+            "properties": {
+                "dnsName": "bst-5f57e0bd-136f-4e95-aef0-fce07ef023cd.bastion.azure.com",
+                "scaleUnits": 2,
+                "ipConfigurations": [
+                    {
+                        "name": "IpConf",
+                        "id": "[concat(resourceId('Microsoft.Network/bastionHosts', parameters('bastionHosts_VNet497_Bastion_name')), '/bastionHostIpConfigurations/IpConf')]",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_vnet497publicIPbastion_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'AzureBastionSubnet')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_497client1186_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'clientsubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client1_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client1186_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.2.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'clientsubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client1_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_497client2369_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'clientsubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client2_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_497client2369_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.2.5",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'clientsubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_497client2_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2023-11-01",
+            "name": "[parameters('networkInterfaces_srv497173_name')]",
+            "location": "japaneast",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'srvsubnet')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_srv497_nsg_name'))]"
+            ],
+            "kind": "Regular",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_srv497173_name')), '/ipConfigurations/ipconfig1')]",
+                        "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+                        "properties": {
+                            "privateIPAddress": "10.0.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_VNet497_name'), 'srvsubnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableAcceleratedNetworking": false,
+                "enableIPForwarding": false,
+                "disableTcpStateTracking": false,
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_srv497_nsg_name'))]"
+                },
+                "nicType": "Standard",
+                "auxiliaryMode": "None",
+                "auxiliarySku": "None"
+            }
+        }
+    ]
+}

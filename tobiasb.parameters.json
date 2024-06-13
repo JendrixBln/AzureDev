@@ -6,10 +6,13 @@
             "value": "northeurope"
         },
         "networkInterfaceName": {
-            "value": "devjosefg292"
+            "value": "devtobiasb105"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
         },
         "networkSecurityGroupName": {
-            "value": "DevJosefG-nsg"
+            "value": "DevTobiasB-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [
@@ -32,7 +35,7 @@
             "value": "default"
         },
         "virtualNetworkName": {
-            "value": "DevJosefG-vnet"
+            "value": "DevTobiasB-vnet"
         },
         "addressPrefixes": {
             "value": [
@@ -50,7 +53,7 @@
             ]
         },
         "publicIpAddressName": {
-            "value": "DevJosefG-ip"
+            "value": "DevTobiasB-ip"
         },
         "publicIpAddressType": {
             "value": "Static"
@@ -59,16 +62,16 @@
             "value": "Standard"
         },
         "pipDeleteOption": {
-            "value": "Delete"
+            "value": "Detach"
         },
         "virtualMachineName": {
-            "value": "DevJosefG"
+            "value": "DevTobiasB"
         },
         "virtualMachineComputerName": {
-            "value": "DevJosefG"
+            "value": "DevTobiasB"
         },
         "virtualMachineRG": {
-            "value": "K10_Josef"
+            "value": "K10_Tobis_B"
         },
         "osDiskType": {
             "value": "Standard_LRS"
@@ -77,10 +80,10 @@
             "value": "Delete"
         },
         "virtualMachineSize": {
-            "value": "Standard_B2s"
+            "value": "Standard_DS1_v2"
         },
         "nicDeleteOption": {
-            "value": "Delete"
+            "value": "Detach"
         },
         "hibernationEnabled": {
             "value": false
@@ -89,7 +92,7 @@
             "value": "adminuser"
         },
         "adminPassword": {
-            "value": "Passwort123!"
+            "value": "hKwPo1956/gH12"
         },
         "patchMode": {
             "value": "AutomaticByOS"

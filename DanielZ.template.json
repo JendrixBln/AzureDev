@@ -3,76 +3,76 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "type": "String"
         },
         "networkInterfaceName": {
-            "type": "string"
+            "type": "String"
         },
         "networkSecurityGroupName": {
-            "type": "string"
+            "type": "String"
         },
         "networkSecurityGroupRules": {
-            "type": "array"
+            "type": "Array"
         },
         "subnetName": {
-            "type": "string"
+            "type": "String"
         },
         "virtualNetworkName": {
-            "type": "string"
+            "type": "String"
         },
         "addressPrefixes": {
-            "type": "array"
+            "type": "Array"
         },
         "subnets": {
-            "type": "array"
+            "type": "Array"
         },
         "publicIpAddressName": {
-            "type": "string"
+            "type": "String"
         },
         "publicIpAddressType": {
-            "type": "string"
+            "type": "String"
         },
         "publicIpAddressSku": {
-            "type": "string"
+            "type": "String"
         },
         "pipDeleteOption": {
-            "type": "string"
+            "type": "String"
         },
         "virtualMachineName": {
-            "type": "string"
+            "type": "String"
         },
         "virtualMachineComputerName": {
-            "type": "string"
+            "type": "String"
         },
         "virtualMachineRG": {
-            "type": "string"
+            "type": "String"
         },
         "osDiskType": {
-            "type": "string"
+            "type": "String"
         },
         "osDiskDeleteOption": {
-            "type": "string"
+            "type": "String"
         },
         "virtualMachineSize": {
-            "type": "string"
+            "type": "String"
         },
         "nicDeleteOption": {
-            "type": "string"
+            "type": "String"
         },
         "hibernationEnabled": {
-            "type": "bool"
+            "type": "Bool"
         },
         "adminUsername": {
-            "type": "string"
+            "type": "String"
         },
         "adminPassword": {
-            "type": "secureString"
+            "type": "SecureString"
         },
         "patchMode": {
-            "type": "string"
+            "type": "String"
         },
         "enableHotpatching": {
-            "type": "bool"
+            "type": "Bool"
         }
     },
     "variables": {
@@ -83,15 +83,18 @@
     },
     "resources": [
         {
-            "name": "[parameters('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2022-11-01",
+            "name": "[parameters('networkInterfaceName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
                 "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
                 "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]"
             ],
+            "tags": {
+                "Test PC Aufgabe 4.9.6 K_10DanielZ": "1"
+            },
             "properties": {
                 "ipConfigurations": [
                     {
@@ -116,19 +119,25 @@
             }
         },
         {
-            "name": "[parameters('networkSecurityGroupName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2020-05-01",
+            "name": "[parameters('networkSecurityGroupName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "Test PC Aufgabe 4.9.6 K_10DanielZ": "1"
+            },
             "properties": {
                 "securityRules": "[parameters('networkSecurityGroupRules')]"
             }
         },
         {
-            "name": "[parameters('virtualNetworkName')]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2023-05-01",
+            "name": "[parameters('virtualNetworkName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "Test PC Aufgabe 4.9.6 K_10DanielZ": "1"
+            },
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": "[parameters('addressPrefixes')]"
@@ -137,25 +146,31 @@
             }
         },
         {
-            "name": "[parameters('publicIpAddressName')]",
             "type": "Microsoft.Network/publicIpAddresses",
             "apiVersion": "2020-08-01",
+            "name": "[parameters('publicIpAddressName')]",
             "location": "[parameters('location')]",
-            "properties": {
-                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
+            "tags": {
+                "Test PC Aufgabe 4.9.6 K_10DanielZ": "1"
             },
             "sku": {
                 "name": "[parameters('publicIpAddressSku')]"
+            },
+            "properties": {
+                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
             }
         },
         {
-            "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2024-03-01",
+            "name": "[parameters('virtualMachineName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
             ],
+            "tags": {
+                "Test PC Aufgabe 4.9.6 K_10DanielZ": "1"
+            },
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[parameters('virtualMachineSize')]"
@@ -212,7 +227,7 @@
     ],
     "outputs": {
         "adminUsername": {
-            "type": "string",
+            "type": "String",
             "value": "[parameters('adminUsername')]"
         }
     }

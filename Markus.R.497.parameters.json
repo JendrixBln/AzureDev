@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworks_VNet_MR_DE_name": {
+            "value": null
+        },
+        "virtualMachines_mr_win2022_de_name": {
+            "value": null
+        },
+        "virtualMachines_mr_win11_vm1_de_name": {
+            "value": null
+        },
+        "virtualMachines_mr_win11_vm2_de_name": {
+            "value": null
+        },
+        "bastionHosts_VNet_MR_DE_bastion_name": {
+            "value": null
+        },
+        "publicIPAddresses_VNet_MR_DE_ip_name": {
+            "value": null
+        },
+        "networkInterfaces_mr_win2022_de84_name": {
+            "value": null
+        },
+        "networkInterfaces_mr_win11_vm1_de454_name": {
+            "value": null
+        },
+        "networkInterfaces_mr_win11_vm2_de680_name": {
+            "value": null
+        },
+        "virtualMachines_mr_win2022_bastion_de_name": {
+            "value": null
+        },
+        "networkSecurityGroups_mr_win2022_de_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_mr_win11_vm1_de_nsg_name": {
+            "value": null
+        },
+        "networkSecurityGroups_mr_win11_vm2_de_nsg_name": {
+            "value": null
+        },
+        "networkInterfaces_mr_win2022_bastion_de143_name": {
+            "value": null
+        },
+        "autoscalesettings_K10_Markus_Scalesetautoscale_name": {
+            "value": null
+        },
+        "networkSecurityGroups_mr_win2022_bastion_de_nsg_name": {
+            "value": null
+        },
+        "virtualMachineScaleSets_K10_Markus_Scaleset_externalid": {
+            "value": null
+        }
+    }
+}
