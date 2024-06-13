@@ -1,0 +1,350 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "extendedLocation": {
+            "value": {}
+        },
+        "virtualNetworkName": {
+            "value": "DominikVnet"
+        },
+        "tagsByResource": {
+            "value": {
+                "Microsoft.Network/virtualNetworks": {},
+                "Microsoft.Network/ddosProtectionPlans": {},
+                "Microsoft.Network/publicIPAddresses": {},
+                "Microsoft.Network/azureFirewalls": {},
+                "Microsoft.Network/bastionHosts": {},
+                "Microsoft.Network/natGateways": {},
+                "Microsoft.Network/publicIPPrefixes": {},
+                "Microsoft.Network/networkSecurityGroups": {}
+            }
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "natGatewaysWithNewPublicIpAddress": {
+            "value": []
+        },
+        "natGatewaysWithoutNewPublicIpAddress": {
+            "value": []
+        },
+        "natGatewayPublicIpAddressesNewNames": {
+            "value": []
+        },
+        "networkSecurityGroupsNew": {
+            "value": []
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "AzureBastionSubnet",
+                    "properties": {
+                        "addressPrefixes": [
+                            "10.0.0.0/24"
+                        ],
+                        "defaultOutboundAccess": null,
+                        "privateEndpointNetworkPolicies": "Disabled"
+                    }
+                },
+                {
+                    "name": "Server",
+                    "properties": {
+                        "addressPrefixes": [
+                            "10.0.1.0/24"
+                        ],
+                        "defaultOutboundAccess": null,
+                        "privateEndpointNetworkPolicies": "Disabled"
+                    }
+                },
+                {
+                    "name": "Clients",
+                    "properties": {
+                        "addressPrefixes": [
+                            "10.0.2.0/24"
+                        ],
+                        "defaultOutboundAccess": null,
+                        "privateEndpointNetworkPolicies": "Disabled"
+                    }
+                }
+            ]
+        },
+        "ddosProtectionPlanEnabled": {
+            "value": false
+        },
+        "firewallEnabled": {
+            "value": false
+        },
+        "firewallSkuTier": {
+            "value": "Standard"
+        },
+        "firewallPolicyIsNew": {},
+        "firewallPolicyId": {},
+        "firewallPolicyTier": {},
+        "firewallPublicIpAddressIsNew": {
+            "value": false
+        },
+        "firewallPublicIpAddressId": {
+            "value": ""
+        },
+        "bastionEnabled": {
+            "value": false
+        },
+        "bastionPublicIpAddressIsNew": {
+            "value": false
+        },
+        "bastionPublicIPAddressId": {
+            "value": ""
+        },
+        "bastionNsgIsNew": {},
+        "bastionNsgId": {},
+        "encryptionEnabled": {
+            "value": false
+        },
+        "encryptionEnforcement": {
+            "value": "AllowUnencrypted"
+        },
+        "addressSpaceStartingAddressChanged": {
+            "value": false
+        },
+        "addressSpaceAddressSizeChanged": {
+            "value": false
+        },
+        "ipv6Enabled": {
+            "value": false
+        },
+        "defaultSubnetChanged": {
+            "value": true
+        },
+        "subnetsInfo": {
+            "value": [
+                {
+                    "cidr": "10.0.0.0/24",
+                    "name": "Azure Bastion",
+                    "natGw": "none",
+                    "nsg": "none",
+                    "udr": "none"
+                },
+                {
+                    "cidr": "10.0.1.0/24",
+                    "name": "Default",
+                    "natGw": "none",
+                    "nsg": "none",
+                    "udr": "none"
+                },
+                {
+                    "cidr": "10.0.2.0/24",
+                    "name": "Default",
+                    "natGw": "none",
+                    "nsg": "none",
+                    "udr": "none"
+                }
+            ]
+        },
+        "subnetCount": {
+            "value": 3
+        },
+        "resourceGroup": {
+            "value": "K10_Dominik"
+        },
+        "bastionHostName": {
+            "value": "DominikBastion"
+        },
+        "bastionHostSku": {
+            "value": "standard"
+        },
+        "bastionHostScaleUnits": {
+            "value": 2
+        },
+        "enableIpConnect": {
+            "value": false
+        },
+        "enableTunneling": {
+            "value": false
+        },
+        "enableShareableLink": {
+            "value": false
+        },
+        "subnetId": {
+            "value": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Dominik/providers/Microsoft.Network/virtualNetworks/DominikVnet/subnets/AzureBastionSubnet"
+        },
+        "enableKerberos": {
+            "value": false
+        },
+        "disableCopyPaste": {
+            "value": false
+        },
+        "enableSessionRecording": {
+            "value": false
+        },
+        "enablePrivateOnlyBastion": {
+            "value": false
+        },
+        "zones": {
+            "value": []
+        },
+        "publicIpZones": {
+            "value": []
+        },
+        "publicIpAddressName": {
+            "value": "DominikBastionIP"
+        },
+        
+        "client1networkInterfaceName": {
+            "value": "dominikclient1"
+        },
+        "client2networkInterfaceName": {
+            "value": "dominikclient2"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "client1networkSecurityGroupName": {
+            "value": "DominikClient1-nsg"
+        },
+        "client2networkSecurityGroupName": {
+            "value": "DominikClient2-nsg"
+        },
+        "client1networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "client2networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "clientsubnetName": {
+            "value": "Clients"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/030e8b67-3da2-4a38-99a2-d014a1367c82/resourceGroups/K10_Dominik/providers/Microsoft.Network/virtualNetworks/DominikVnet"
+        },
+        "client1virtualMachineName": {
+            "value": "DominikClient1"
+        },
+        "client2virtualMachineName": {
+            "value": "DominikClient2"
+        },
+        "client1virtualMachineComputerName": {
+            "value": "DominikClient1"
+        },
+        "client2virtualMachineComputerName": {
+            "value": "DominikClient2"
+        },
+        "virtualMachineRG": {
+            "value": "K10_Dominik"
+        },
+        "osDiskType": {
+            "value": "Standard_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2als_v2"
+        },
+        "nicDeleteOption": {
+            "value": "Delete"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "adminuser"
+        },
+        "adminPassword": {
+            "value": "123456789qQ!"
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "securityType": {
+            "value": "TrustedLaunch"
+        },
+        "secureBoot": {
+            "value": true
+        },
+        "vTPM": {
+            "value": true
+        },
+        "servernetworkInterfaceName": {
+            "value": "dominikserver1"
+        },
+        "servernetworkSecurityGroupName": {
+            "value": "DominikServer-nsg"
+        },
+        "servernetworkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "Jep",
+                    "properties": {
+                        "priority": 100,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "10.0.2.0/24",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                },
+                {
+                    "name": "Nope",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Deny",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "serversubnetName": {
+            "value": "Server"
+        },
+        "servervirtualMachineName": {
+            "value": "DominikServer"
+        },
+        "servervirtualMachineComputerName": {
+            "value": "DominikServer"
+        }
+    }
+}
