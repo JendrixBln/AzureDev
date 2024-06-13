@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_k10_jo_CL01_name": {
+            "value": "k10-jo-CL01"
+        },
+        "virtualMachines_k10_jo_CL02_name": {
+            "value": "k10-jo-CL02"
+        },
+        "virtualNetworks_k10_jo_vnet_name": {
+            "value": "k10-jo-vnet"
+        },
+        "virtualMachines_k10_jo_SRV01_name": {
+            "value": "k10-jo-SRV01"
+        },
+        "bastionHosts_k10_jo_vnet_Bastion_name": {
+            "value": "k10-jo-vnet-Bastion"
+        },
+        "networkInterfaces_k10_jo_cl01598_name": {
+            "value": "k10-jo-cl01598"
+        },
+        "networkInterfaces_k10_jo_cl02408_name": {
+            "value": "k10_jo_cl02408"
+        },
+        "networkInterfaces_k10_jo_srv01800_name": {
+            "value": "k10-jo-svr01800"
+        },
+        "networkSecurityGroups_k10_jo_CL01_nsg_name": {
+            "value": "k10-jo-CL01-nsg"
+        },
+        "networkSecurityGroups_k10_jo_CL02_nsg_name": {
+            "value": "k10-jo-CL02-nsg"
+        },
+        "publicIPAddresses_k10_jo_vnet_bastion_name": {
+            "value": "k10-jo-vnet-bastion"
+        },
+        "networkSecurityGroups_k10_jo_SRV01_nsg_name": {
+            "value": "10_jo_srv01_nsg"
+        }
+    }
+}
