@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_ClientA_name": {
+            "value": "ClientA"
+        },
+        "virtualMachines_ClientB_name": {
+            "value": "ClientB"
+        },
+        "virtualMachines_ServerNet_name": {
+            "value":"ServerNet" 
+        },
+        "networkInterfaces_clienta176_name": {
+            "value": "clienta123"
+        },
+        "networkInterfaces_clientb452_name": {
+            "value": "clientb234"
+        },
+        "virtualNetworks_MuAn_Network_name": {
+            "value": "muannet69"
+        },
+        "networkInterfaces_servernet303_name": {
+            "value": "servernet404"
+        },
+        "bastionHosts_MuAn_Network_Bastion_name": {
+            "value": "bastion456"
+        },
+        "networkSecurityGroups_ClientB_nsg_name": {
+            "value": "clientbnsg23"
+        },
+        "networkSecurityGroups_ServerNet_nsg_name": {
+            "value": "servernetnsg69"
+        },
+        "publicIPAddresses_muan_network_bastion_name": {
+            "value": "bastionnet67"
+        }
+    }
+}
